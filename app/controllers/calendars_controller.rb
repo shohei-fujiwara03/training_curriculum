@@ -36,10 +36,8 @@ class CalendarsController < ApplicationController
         today_plans.push(plan.plan) if plan.date == @todays_date + x
       end
 
-      @day = Date.today.wday + x
-      if @day >= 7
-        @day -= 7
-      end
+      @day = (Date.today.wday + x) % 7
+      
       days = { month: (@todays_date + x).month, date: (@todays_date+x).day, plans: today_plans,wday:wdays[@day]}
 
       @week_days.push(days)
